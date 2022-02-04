@@ -1,15 +1,15 @@
 output "ip_address" {
   description = "IP Address"
-  value       = phpipam_address.ip.ip_address
+  value       = phpipam_first_free_address.next_address.*.ip_address
 }
 
 output "hostname" {
   description = "IP hostname"
-  value       = phpipam_address.ip.hostname
+  value       = phpipam_first_free_address.next_address.*.hostname
 }
 
 output "ip_description" {
-  value       = phpipam_address.ip.description
+  value       = phpipam_first_free_address.next_address.*.description
   description = "IP Description"
 }
 

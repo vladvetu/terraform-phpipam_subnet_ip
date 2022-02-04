@@ -1,19 +1,15 @@
 data "phpipam_subnet" "subnet" {
-  subnet_address = "${var.subnet_address}"
-  subnet_mask    = "${var.subnet_mask}"
+  subnet_address = var.subnet_address
+  subnet_mask    = var.subnet_mask
 }
 
-data "phpipam_first_free_address" "next_address" {
-  subnet_id = data.phpipam_subnet.subnet.subnet_id
-}
-
-
-resource "phpipam_address" "ip" {
+resource "phpipam_first_free_address" "next_address" {
+  count = var.ip_count
   subnet_id   = data.phpipam_subnet.subnet.subnet_id
-  ip_address  = data.phpipam_first_free_address.next_address.ip_address
-  hostname    = "${var.hostname}"
+  hostname    = var.hostnames[count.index]
   description = "${var.description}"
-
+  owner       = var.phpipam_username
+  
   lifecycle {
     ignore_changes = [
       subnet_id,

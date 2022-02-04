@@ -29,3 +29,14 @@ variable ip_count {
   description = "description"
 }
 
+variable hostnames {
+  type        = list(string)
+  default     = []
+  description = "description"
+}
+
+variable phpipam_username {
+  type        = string
+  default     = ""
+  description = "description"
+}
